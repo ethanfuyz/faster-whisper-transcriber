@@ -1,40 +1,44 @@
 # Faster Whisper Transcriber
 
-A simple transcription tool based on [`faster-whisper`](https://github.com/guillaumekln/faster-whisper), designed for macOS users working with audio/video files. It transcribes input media and generates a **Simplified Chinese `.srt` subtitle file** in the same directory as the original file.
+A lightweight transcription tool based on [`faster-whisper`](https://github.com/guillaumekln/faster-whisper). It transcribes audio or video files into Simplified Chinese `.srt` subtitle files and saves them to the same directory.
 
-## ✅ Features
-
-- Transcribes audio/video to `.srt` subtitle
-- Converts to Simplified Chinese using OpenCC
-- Outputs the subtitle file to the same folder
-- Compatible with [FCPX subtitle tool](https://orzass.com/crossub/srt/63) to generate `.fcpxml` files for Final Cut Pro
+Designed for macOS users working with Final Cut Pro or similar tools.
 
 ---
 
-## ⚙️ Environment Setup (macOS Terminal)
+## ✅ Features
 
-Ensure you have the following installed:
+- Transcribes audio/video files to `.srt` subtitle
+- Converts subtitles to Simplified Chinese using OpenCC
+- Output is saved next to the original media file
+- Works seamlessly with the FCPX subtitle tool: [Crossub FCPXML Exporter](https://orzass.com/crossub/srt/63)
+
+---
+
+## ⚙️ Environment Setup (macOS)
+
+You’ll need:
 
 - Python 3.x
 - pip3
-- virtual environment support
-- `faster-whisper` for transcription
-- `opencc` for Traditional-to-Simplified Chinese conversion
+- A virtual environment
+- `faster-whisper` (for transcription)
+- `opencc` (for Traditional → Simplified conversion)
 
-### 🔧 Step-by-step installation
+### 🔧 Installation Steps
 
 ```bash
-# 1. Create and activate a virtual environment
+# 1. Create a virtual environment
 python3 -m venv ~/.venvs/faster-whisper-env
+
+# 2. Activate the virtual environment
 source ~/.venvs/faster-whisper-env/bin/activate
 
-# 2. Upgrade pip
+# 3. Upgrade pip
 pip install --upgrade pip
 
-# 3. Install faster-whisper (for Whisper transcription)
+# 4. Install required packages
 pip install faster-whisper
-
-# 4. Install OpenCC (for converting subtitles to Simplified Chinese)
 pip install opencc-python-reimplemented
 ```
 
@@ -42,38 +46,37 @@ pip install opencc-python-reimplemented
 
 ## 🚀 How to Use
 
-1. Place your Python script `transcribe_to_srt.py` in a folder, e.g. `~/Documents/faster-whisper-transcriber/`.
-2. Use the provided shell script `run_transcribe.sh` to automate activation and transcription.
-3. Drag your video/audio file into the terminal when prompted.
-4. The script will generate an `.srt` subtitle file named like `YourFile_Simple.srt`.
+1. Open Terminal
+2. Activate the virtual environment:
+   ```bash
+   source ~/.venvs/faster-whisper-env/bin/activate
+   ```
+3. Run the transcription script and **drag your media file into Terminal**, then press `Enter`:
+   ```bash
+   python3 ~/Documents/faster-whisper-transcriber/transcribe_to_srt.py [drag your file here]
+   ```
 
-Example:
-
-```bash
-./run_transcribe.sh
-# [Drag and drop your file here] then press Enter
-```
-
----
-
-## 🎬 Export to FCPX
-
-After generating the `.srt`, go to:
-
-👉 [https://orzass.com/crossub/srt/63](https://orzass.com/crossub/srt/63)
-
-Then:
-
-1. Paste your `.srt` content into the webpage.
-2. Select **25fps** or the frame rate you need.
-3. Click **Export** to download an FCPXML subtitle file compatible with Final Cut Pro.
+4. A new `.srt` file will be created in the same folder, named like:
+   ```
+   YourFile_Simple.srt
+   ```
 
 ---
 
-## 📝 License
+## 🎬 Export to Final Cut Pro (FCPXML)
+
+1. Go to: [https://orzass.com/crossub/srt/63](https://orzass.com/crossub/srt/63)
+2. Paste the generated `.srt` content into the input box
+3. Select **25fps** (or another frame rate as needed)
+4. Click **Export** to download `.fcpxml`
+5. Import the `.fcpxml` into Final Cut Pro
+
+---
+
+## 📄 License
 
 MIT License
 
 ---
 
-Feel free to extend this tool with automatic `.fcpxml` export or GUI integration.
+Feel free to modify or extend this project to automate FCPXML generation or integrate it with video editing pipelines.
