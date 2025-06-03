@@ -36,10 +36,6 @@ pip install faster-whisper
 
 # 4. Install OpenCC (for converting subtitles to Simplified Chinese)
 pip install opencc-python-reimplemented
-
-# 5. (Optional) Test installation
-python3 -c "from faster_whisper import WhisperModel; print('faster-whisper OK')"
-python3 -c "from opencc import OpenCC; print(OpenCC('t2s').convert('繁體字'))"
 ```
 
 ---
