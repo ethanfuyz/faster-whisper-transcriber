@@ -58,7 +58,7 @@ pip install opencc-python-reimplemented
 
 4. A new `.srt` file will be created in the same folder, named like:
    ```
-   YourFile_Simple.srt
+   YourFile.srt
    ```
 
 ---
