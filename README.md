@@ -17,7 +17,7 @@ Designed for macOS users working with Final Cut Pro or similar tools.
 
 ## ⚙️ Environment Setup (macOS)
 
-You’ll need:
+You'll need:
 
 - Python 3.x
 - pip3
