@@ -55,7 +55,8 @@ pip install opencc-python-reimplemented
    ```bash
    python3 ~/Documents/faster-whisper-transcriber/transcribe_to_srt.py [drag your file here]
    ```
-
+   or
+   Drag a file onto SRT Transcriber.app, or right-click the file and choose Open With → SRT Transcriber.app to transcribe with one click.
 4. A new `.srt` file will be created in the same folder, named like:
    ```
    YourFile.srt
