@@ -65,11 +65,11 @@ pip install opencc-python-reimplemented
 
 ## 🎬 Export to Final Cut Pro (FCPXML)
 
-1. Go to: [https://orzass.com/crossub/srt/63](https://orzass.com/crossub/srt/63)
+1. Go to: [Subtitle Tool & Converter](https://editingtools.io/subtitles/)
 2. Paste the generated `.srt` content into the input box
-3. Select **25fps** (or another frame rate as needed)
-4. Click **Export** to download `.fcpxml`
-5. Import the `.fcpxml` into Final Cut Pro
+3. Select **.fcpxml**
+4. Select **25fps** (or another frame rate as needed)
+6. Click **Generate** then **Download**
 
 ---
 
