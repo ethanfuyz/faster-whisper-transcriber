@@ -70,13 +70,3 @@ pip install opencc-python-reimplemented
 3. Select **.fcpxml**
 4. Select **25fps** (or another frame rate as needed)
 6. Click **Generate** then **Download**
-
----
-
-## 📄 License
-
-MIT License
-
----
-
-Feel free to modify or extend this project to automate FCPXML generation or integrate it with video editing pipelines.
