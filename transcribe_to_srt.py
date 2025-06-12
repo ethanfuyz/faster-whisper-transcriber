@@ -42,7 +42,7 @@ def main():
     output_srt = os.path.join(os.path.dirname(input_path), base_name + ".srt")
 
     print("🔄 Loading model...")
-    model = WhisperModel("medium", device="cpu", compute_type="int8")
+    model = WhisperModel("large-v3", device="cpu", compute_type="int8")
     cc = OpenCC('t2s')
 
     print(f"🎧 Transcribing: {os.path.basename(input_path)}")
