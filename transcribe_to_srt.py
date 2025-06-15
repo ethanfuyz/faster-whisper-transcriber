@@ -5,6 +5,7 @@ import subprocess
 from faster_whisper import WhisperModel
 from opencc import OpenCC
 
+
 def format_timestamp(seconds):
     td = datetime.timedelta(seconds=seconds)
     total_seconds = int(td.total_seconds())
@@ -13,6 +14,7 @@ def format_timestamp(seconds):
     secs = total_seconds % 60
     milliseconds = int((td.total_seconds() - total_seconds) * 1000)
     return f"{hours:02}:{minutes:02}:{secs:02},{milliseconds:03}"
+
 
 def get_duration_ms(filepath):
     try:
@@ -28,6 +30,7 @@ def get_duration_ms(filepath):
         print("⚠️ Could not determine duration:", e)
         return None
 
+
 def main():
     if len(sys.argv) < 2:
         print("❗ Please drag and drop an audio/video file onto this script, or run:\npython3 transcribe_to_srt.py <your_file>")
@@ -42,7 +45,7 @@ def main():
     output_srt = os.path.join(os.path.dirname(input_path), base_name + ".srt")
 
     print("🔄 Loading model...")
-    model = WhisperModel("large-v3", device="cpu", compute_type="int8")
+    model = WhisperModel("medium", device="cpu", compute_type="int8")
     cc = OpenCC('t2s')
 
     print(f"🎧 Transcribing: {os.path.basename(input_path)}")
@@ -62,10 +65,12 @@ def main():
             f.write(srt_block + "\n")
 
             # Calculate and print progress (overwrite same line)
-            percent = int((segment.end * 1000) / total_duration_ms * 100) if total_duration_ms else 0
+            percent = int((segment.end * 1000) /
+                          total_duration_ms * 100) if total_duration_ms else 0
             print(f"\r🔁 Progress: [{percent:3}%]", end="", flush=True)
 
     print(f"\n✅ Done! SRT file saved to: {output_srt}")
+
 
 if __name__ == "__main__":
     main()
