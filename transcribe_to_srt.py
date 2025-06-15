@@ -5,6 +5,12 @@ import subprocess
 from faster_whisper import WhisperModel
 from opencc import OpenCC
 
+# Define model directory
+MODEL_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "models")
+
+# Ensure model directory exists
+os.makedirs(MODEL_DIR, exist_ok=True)
+
 
 def format_timestamp(seconds):
     td = datetime.timedelta(seconds=seconds)
@@ -45,7 +51,8 @@ def main():
     output_srt = os.path.join(os.path.dirname(input_path), base_name + ".srt")
 
     print("🔄 Loading model...")
-    model = WhisperModel("medium", device="cpu", compute_type="int8")
+    model = WhisperModel("medium", device="cpu",
+                         compute_type="int8", download_root=MODEL_DIR)
     cc = OpenCC('t2s')
 
     print(f"🎧 Transcribing: {os.path.basename(input_path)}")
