@@ -53,8 +53,8 @@
 					<key>source</key>
 					<string>on run {input, parameters}
     set filePath to POSIX path of item 1 of input
-    set shellScript to "source ~/.venvs/faster-whisper-env/bin/activate &amp;&amp; python3 ~/Documents/faster-whisper-transcriber/transcribe_to_srt.py \"" &amp; filePath &amp; "\"; exec zsh"
-
+    set shellScript to "cd ~/Documents/faster-whisper-transcriber &amp;&amp; source .venv/bin/activate &amp;&amp; python3 transcribe_to_srt.py \"" &amp; filePath &amp; "\"; exec zsh"
+    
     tell application "Terminal"
         activate
         do script shellScript
@@ -113,12 +113,10 @@ end run</string>
 						<string>0</string>
 					</dict>
 				</dict>
-				<key>conversionLabel</key>
-				<integer>0</integer>
 				<key>isViewVisible</key>
 				<integer>1</integer>
 				<key>location</key>
-				<string>309.000000:315.000000</string>
+				<string>309.000000:589.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run AppleScript.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>
