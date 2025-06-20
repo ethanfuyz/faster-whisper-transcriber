@@ -11,7 +11,7 @@ Designed for macOS users working with Final Cut Pro or similar tools.
 - Transcribes audio/video files to `.srt` subtitle
 - Converts subtitles to Simplified Chinese using OpenCC
 - Output is saved next to the original media file
-- Works seamlessly with the FCPX subtitle tool: [Crossub FCPXML Exporter](https://orzass.com/crossub/srt/63)
+- Works seamlessly with the FCPX subtitle tool: [Subtitle Tool & Converter](https://editingtools.io/subtitles/)
 
 ---
 
