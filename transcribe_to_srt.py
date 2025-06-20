@@ -48,7 +48,8 @@ def main():
         sys.exit(1)
 
     base_name = os.path.splitext(os.path.basename(input_path))[0]
-    output_srt = os.path.join(os.path.dirname(input_path), base_name + ".srt")
+    output_srt = os.path.join(os.path.dirname(
+        input_path), base_name + "_generated.srt")
 
     print("🔄 Loading model...")
     model = WhisperModel("medium", device="cpu",
