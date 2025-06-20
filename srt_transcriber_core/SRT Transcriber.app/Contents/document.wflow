@@ -51,7 +51,7 @@
 				<key>ActionParameters</key>
 				<dict>
 					<key>source</key>
-					<string>on run {input, parameters}    set filePath to POSIX path of item 1 of input    set shellScript to "cd ~/Documents/faster-whisper-transcriber &amp;&amp; source ~/.venv/srt_transcriber_env/bin/activate &amp;&amp; python3 transcribe_to_srt.py \"" &amp; filePath &amp; "\"; exec zsh"        tell application "Terminal"        activate        do script shellScript    end tell    return inputend run</string>
+					<string>on run {input, parameters}    set filePath to POSIX path of item 1 of input    set shellScript to "cd ~/Documents/faster-whisper-transcriber/srt_transcriber_core &amp;&amp; source ~/.venv/srt_transcriber_env/bin/activate &amp;&amp; python3 transcribe_to_srt.py \"" &amp; filePath &amp; "\"; exec zsh"        tell application "Terminal"        activate        do script shellScript    end tell    return inputend run</string>
 				</dict>
 				<key>BundleIdentifier</key>
 				<string>com.apple.Automator.RunScript</string>
