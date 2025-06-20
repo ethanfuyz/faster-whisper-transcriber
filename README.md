@@ -68,7 +68,7 @@ pip install opencc-python-reimplemented
        set filePath to POSIX path of item 1 of input
 
        -- Make sure to replace <your-path-to> with the absolute path to your project directory
-       set shellScript to "cd ~/Documents/faster-whisper-transcriber && source ~/.venv/srt_transcriber_env/bin/activate && python3 transcribe_to_srt.py \"" & filePath & "\"; exec zsh"
+       set shellScript to "cd ~/Documents/faster-whisper-transcriber/srt_transcriber_core && source ~/.venv/srt_transcriber_env/bin/activate && python3 transcribe_to_srt.py \"" & filePath & "\"; exec zsh"
     
        tell application "Terminal"
            activate
