@@ -17,6 +17,7 @@ struct ContentView: View {
     @State private var totalDuration: Double = 0
     @State private var selectedModel = "medium"
     let availableModels = ["tiny", "base", "small", "medium", "large-v3"]
+    @State private var convertTraditionalToSimplified = true
 
     var body: some View {
         VStack(spacing: 30) {
@@ -48,13 +49,19 @@ struct ContentView: View {
                 .buttonStyle(PlainButtonStyle())
             }
             
-            Picker("Model", selection: $selectedModel) {
-                ForEach(availableModels, id: \.self) { model in
-                    Text(model).tag(model)
+            HStack {
+                Picker("Model", selection: $selectedModel) {
+                    ForEach(availableModels, id: \.self) { model in
+                        Text(model).tag(model)
+                    }
                 }
+                .pickerStyle(MenuPickerStyle())
+                .padding(.horizontal, 4)
+
+                Toggle("繁 <> 简", isOn: $convertTraditionalToSimplified)
+                    .toggleStyle(SwitchToggleStyle())
+                    .padding(.leading, 12)
             }
-            .pickerStyle(MenuPickerStyle())
-            .padding(.horizontal, 64)
 
             Button(action: {
                 Task {
@@ -114,10 +121,11 @@ struct ContentView: View {
 
         isGenerating = true
         progressText = "Generating 0%"
-
+        
+        let convertArg = convertTraditionalToSimplified ? "true" : "false"
         let process = Process()
         process.executableURL = URL(fileURLWithPath: pythonPath)
-        process.arguments = [scriptPath, inputURL.path, selectedModel]
+        process.arguments = [scriptPath, inputURL.path, selectedModel, convertArg]
 
         let pipe = Pipe()
         process.standardOutput = pipe

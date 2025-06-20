@@ -22,6 +22,12 @@ def main():
 
     input_path = sys.argv[1]
     model_name = sys.argv[2] if len(sys.argv) > 2 else "medium"
+    
+    convert_trad_to_simp = True
+    if len(sys.argv) > 3:
+        convert_trad_to_simp = sys.argv[3].lower() == "true"
+#        text_type = "s" if convert_trad_to_simp else "t"
+    
     if not os.path.isfile(input_path):
         print("❗ File not found:", input_path)
         sys.exit(1)
@@ -31,14 +37,18 @@ def main():
 
     print("🔄 Loading model...")
     model = WhisperModel(model_name, device="cpu", compute_type="int8")
-    cc = OpenCC('t2s')
+    cc = OpenCC('t2s') if convert_trad_to_simp else OpenCC('s2t')
 
     with open(output_srt, "w", encoding="utf-8") as f:
         for i, segment in enumerate(model.transcribe(input_path, language="zh", beam_size=5)[0], start=1):
-            simplified_text = cc.convert(segment.text.strip())
+        
+            text = segment.text.strip()
+            if cc is not None:
+                text = cc.convert(text)
+                
             start_time = format_timestamp(segment.start)
             end_time = format_timestamp(segment.end)
-            srt_block = f"{i}\n{start_time} --> {end_time}\n{simplified_text}\n"
+            srt_block = f"{i}\n{start_time} --> {end_time}\n{text}\n"
             f.write(srt_block + "\n")
 
             print(f"END:{segment.end}")
