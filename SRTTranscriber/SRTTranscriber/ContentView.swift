@@ -18,6 +18,7 @@ struct ContentView: View {
     @State private var selectedModel = "medium"
     let availableModels = ["tiny", "base", "small", "medium", "large-v3"]
     @State private var convertTraditionalToSimplified = true
+    @State private var isHoveringLogo = false
 
     var body: some View {
         VStack(spacing: 30) {
@@ -79,10 +80,35 @@ struct ContentView: View {
             }
             .disabled(isGenerating)
             .buttonStyle(PlainButtonStyle())
+            
+            HStack {
+                Spacer()
+                if let logoImage = NSImage(named: "logo-main-white") {
+                    Image(nsImage: logoImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 100)
+                        .scaleEffect(isHoveringLogo ? 1.05 : 1.0)
+                        .animation(.easeInOut(duration: 0.2), value: isHoveringLogo)
+                        .padding(8)
+                        .background(Color.primary.opacity(0.2))
+                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                        .onHover { hovering in
+                            isHoveringLogo = hovering
+                        }
+                        .onTapGesture {
+                            if let url = URL(string: "https://editingtools.io/subtitles/") {
+                                NSWorkspace.shared.open(url)
+                            }
+                        }
+                        .help("Open editingtools.io")
+                }
+            }
         }
         .padding(.horizontal, 16)
-        .padding(.vertical, 24)
-        .frame(minWidth: 300, idealWidth: 380, maxWidth: 420, minHeight: 250, idealHeight: 270, maxHeight: 290)
+        .padding(.vertical, 16)
+        .frame(minWidth: 300, idealWidth: 380, maxWidth: 420,
+               minHeight: 340, idealHeight: 350, maxHeight: 360)
     }
 
     func getDurationSeconds(for url: URL) async -> Double? {
