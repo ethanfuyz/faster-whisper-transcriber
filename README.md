@@ -1,6 +1,5 @@
 # Faster Whisper Transcriber
 
-
 A lightweight transcription tool based on [faster-whisper](https://github.com/guillaumekln/faster-whisper). It transcribes audio or video files into Simplified Chinese `.srt` subtitle files and saves them to the same directory.
 
 Designed for macOS users working with Final Cut Pro or similar tools.
