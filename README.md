@@ -23,7 +23,7 @@ You'll need:
 - pip3
 - A virtual environment
 - `faster-whisper` (for transcription)
-- `opencc` (for Traditional → Simplified conversion)
+- `opencc` (for Traditional <> Simplified Chinese conversion)
 - `ffmpeg` (for handling audio/video files; faster-whisper depends on it to process media input. Without it, transcription may fail. Install via Homebrew: brew install ffmpeg)
 
 ### 🔧 Virtual Environment Installation Steps
