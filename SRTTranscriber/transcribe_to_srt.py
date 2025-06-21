@@ -5,6 +5,24 @@ import subprocess
 from faster_whisper import WhisperModel
 from opencc import OpenCC
 
+def resolve_ffmpeg_path():
+    script_dir = os.path.abspath(os.path.dirname(__file__))
+
+    bundled_path = os.path.join(script_dir, "..", "Resources", "ffmpeg")
+
+    dev_path = os.path.join(script_dir, "ffmpeg")
+
+    if os.path.isfile(os.path.realpath(bundled_path)):
+        return os.path.realpath(bundled_path)
+    elif os.path.isfile(os.path.realpath(dev_path)):
+        return os.path.realpath(dev_path)
+    else:
+        return "ffmpeg"
+
+ffmpeg_path = resolve_ffmpeg_path()
+ffmpeg_dir = os.path.dirname(ffmpeg_path)
+os.environ["PATH"] = f"{ffmpeg_dir}:{os.environ['PATH']}"
+
 def format_timestamp(seconds):
     td = datetime.timedelta(seconds=seconds)
     total_seconds = int(td.total_seconds())
@@ -13,7 +31,6 @@ def format_timestamp(seconds):
     secs = total_seconds % 60
     milliseconds = int((td.total_seconds() - total_seconds) * 1000)
     return f"{hours:02}:{minutes:02}:{secs:02},{milliseconds:03}"
-
 
 def main():
     if len(sys.argv) < 2:

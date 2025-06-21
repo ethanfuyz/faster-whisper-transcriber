@@ -8,10 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		AA92036F2E047B89002A7C3D /* transcribe_to_srt.py in Resources */ = {isa = PBXBuildFile; fileRef = AA92036E2E047B89002A7C3D /* transcribe_to_srt.py */; };
+		AAB872092E0729340092D26F /* ffmpeg in Resources */ = {isa = PBXBuildFile; fileRef = AAB872082E0729340092D26F /* ffmpeg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		AA92036E2E047B89002A7C3D /* transcribe_to_srt.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = transcribe_to_srt.py; sourceTree = "<group>"; };
+		AAB872082E0729340092D26F /* ffmpeg */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = ffmpeg; sourceTree = "<group>"; };
 		AAD0AC2D2E044E8900EEABB5 /* SRTTranscriber.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SRTTranscriber.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -40,6 +42,7 @@
 				AAD0AC2F2E044E8900EEABB5 /* SRTTranscriber */,
 				AAD0AC2E2E044E8900EEABB5 /* Products */,
 				AA92036E2E047B89002A7C3D /* transcribe_to_srt.py */,
+				AAB872082E0729340092D26F /* ffmpeg */,
 			);
 			sourceTree = "<group>";
 		};
@@ -115,6 +118,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAB872092E0729340092D26F /* ffmpeg in Resources */,
 				AA92036F2E047B89002A7C3D /* transcribe_to_srt.py in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

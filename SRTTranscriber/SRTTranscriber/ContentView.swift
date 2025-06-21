@@ -111,6 +111,9 @@ struct ContentView: View {
                minHeight: 340, idealHeight: 350, maxHeight: 360)
     }
 
+    /// Returns the total duration (in seconds) of a media file at the given URL.
+    /// Uses AVFoundation to asynchronously load the duration of the asset.
+    /// Returns nil if the duration can't be loaded.
     func getDurationSeconds(for url: URL) async -> Double? {
         let asset = AVURLAsset(url: url)
         do {
@@ -121,7 +124,39 @@ struct ContentView: View {
             return nil
         }
     }
+    
+    /// Resolves the correct Python interpreter path depending on the environment.
+    ///
+    /// - If running in development mode (i.e. local machine with `.venv/srt_transcriber_env`), it returns that path.
+    /// - If running in production (i.e. inside a packaged `.app`), it returns the path to the bundled virtual environment.
+    /// - If neither is found, the app will terminate with a fatal error.
+    private func resolvePythonPath() -> String {
+        let devPythonPath = FileManager.default
+            .homeDirectoryForCurrentUser
+            .appendingPathComponent(".venv/srt_transcriber_env/bin/python3")
+            .path
 
+        if FileManager.default.fileExists(atPath: devPythonPath) {
+            print("🔧 Using dev Python path: \(devPythonPath)")
+            return devPythonPath
+        }
+
+        guard let resourcePath = Bundle.main.resourcePath else {
+            fatalError("❌ Could not find bundle resource path.")
+        }
+
+        let prodPythonPath = resourcePath + "/srt_transcriber_env/bin/python3"
+        print("📦 Using bundled Python path: \(prodPythonPath)")
+        return prodPythonPath
+    }
+
+    /// Launches the Python transcription script as a subprocess.
+    ///
+    /// - Validates the selected input media file.
+    /// - Resolves the correct Python interpreter path (development or production).
+    /// - Executes the `transcribe_to_srt.py` script with the selected file, model, and conversion options.
+    /// - Monitors output from the Python script and updates the UI with transcription progress.
+    /// - Automatically opens the containing folder when done.
     private func runPythonScript() async {
         print("Generate button clicked")
 
@@ -136,10 +171,8 @@ struct ContentView: View {
             totalDuration = 0
         }
 
-        let pythonPath = FileManager.default
-            .homeDirectoryForCurrentUser
-            .appendingPathComponent(".venv/srt_transcriber_env/bin/python3")
-            .path
+        let pythonPath = resolvePythonPath()
+        
         guard let scriptPath = Bundle.main.path(forResource: "transcribe_to_srt", ofType: "py") else {
             print("Script not found in bundle.")
             return
@@ -184,7 +217,7 @@ struct ContentView: View {
                     isGenerating = false
                     progressText = "Generate"
                 }
-                // ✅ Automatically open the input file after generating
+                // Automatically open the input file after generating
                 NSWorkspace.shared.open(inputURL.deletingLastPathComponent())
             } catch {
                 DispatchQueue.main.async {
@@ -196,6 +229,7 @@ struct ContentView: View {
         }
     }
 
+    /// Opens a file picker dialog to allow the user to select a media file.
     private func openFilePanel() {
         let panel = NSOpenPanel()
         panel.allowedContentTypes = [.movie, .audio]
@@ -206,6 +240,7 @@ struct ContentView: View {
         }
     }
 
+    /// Processes drag-and-drop file input and extracts a valid file URL..
     private func handleDrop(providers: [NSItemProvider]) -> Bool {
         for provider in providers {
             if provider.hasItemConformingToTypeIdentifier(UTType.fileURL.identifier) {
