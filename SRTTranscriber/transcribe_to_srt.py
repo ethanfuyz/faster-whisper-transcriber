@@ -57,7 +57,7 @@ def main():
     cc = OpenCC('t2s') if convert_trad_to_simp else OpenCC('s2t')
 
     with open(output_srt, "w", encoding="utf-8") as f:
-        for i, segment in enumerate(model.transcribe(input_path, language="zh", beam_size=5)[0], start=1):
+        for i, segment in enumerate(model.transcribe(input_path, language=None, beam_size=5)[0], start=1):
         
             text = segment.text.strip()
             if cc is not None:

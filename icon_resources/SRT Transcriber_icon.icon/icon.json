@@ -4,6 +4,8 @@
   },
   "groups" : [
     {
+      "blur-material" : null,
+      "hidden" : false,
       "layers" : [
         {
           "image-name" : "Details.png",
@@ -11,13 +13,16 @@
         },
         {
           "image-name" : "Document.png",
-          "name" : "Document"
+          "name" : "Document",
+          "opacity" : 1
         },
         {
           "image-name" : "Dialog Box.png",
-          "name" : "Dialog Box"
+          "name" : "Dialog Box",
+          "opacity" : 1
         }
       ],
+      "lighting" : "individual",
       "position" : {
         "scale" : 1.07,
         "translation-in-points" : [
@@ -29,8 +34,9 @@
         "kind" : "neutral",
         "opacity" : 0.5
       },
+      "specular" : true,
       "translucency" : {
-        "enabled" : true,
+        "enabled" : false,
         "value" : 0.5
       }
     }
